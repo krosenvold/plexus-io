@@ -16,23 +16,24 @@ package org.codehaus.plexus.components.io.resources.proxy;
  * limitations under the License.
  */
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
 import org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributeUtils;
 import org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributes;
 import org.codehaus.plexus.components.io.attributes.SimpleResourceAttributes;
 import org.codehaus.plexus.components.io.filemappers.FileMapper;
 import org.codehaus.plexus.components.io.fileselectors.FileSelector;
 import org.codehaus.plexus.components.io.fileselectors.IncludeExcludeFileSelector;
+import org.codehaus.plexus.components.io.functions.PlexusIoResourceConsumer;
 import org.codehaus.plexus.components.io.resources.AbstractPlexusIoResourceCollectionWithAttributes;
-import org.codehaus.plexus.components.io.resources.AbstractPlexusIoResource;
 import org.codehaus.plexus.components.io.resources.PlexusIoResource;
 import org.codehaus.plexus.components.io.resources.PlexusIoResourceCollection;
 import org.codehaus.plexus.components.io.resources.PlexusIoResourceWithAttributes;
-
-import javax.annotation.Nonnull;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Implementation of {@link PlexusIoResourceCollection} for an archives contents.
@@ -72,6 +73,8 @@ public class PlexusIoProxyResourceCollection
         setOverrideDirAttributes( new SimpleResourceAttributes( uid, userName, gid, groupName, dirMode ) );
     }
 
+
+
     protected FileSelector getDefaultFileSelector()
     {
         final IncludeExcludeFileSelector fileSelector = new IncludeExcludeFileSelector();
@@ -91,6 +94,16 @@ public class PlexusIoProxyResourceCollection
 		return prefix;
 
 	}
+
+    public void forEach( PlexusIoResourceConsumer resourceConsumer )
+        throws IOException
+    {
+        Iterator<PlexusIoResource> iter = getResources();
+        while (iter.hasNext()){
+            resourceConsumer.accept(  iter.next() );
+        }
+    }
+
     public Iterator<PlexusIoResource> getResources()
         throws IOException
     {

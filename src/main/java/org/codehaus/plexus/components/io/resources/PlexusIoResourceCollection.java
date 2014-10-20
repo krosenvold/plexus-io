@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 
+import org.codehaus.plexus.components.io.functions.PlexusIoResourceConsumer;
+
 
 /**
  * A resource collection is a set of {@link PlexusIoResource} instances.
@@ -43,6 +45,14 @@ public interface PlexusIoResourceCollection extends Iterable<PlexusIoResource>
      * @throws java.io.IOException .
      */
     Iterator<PlexusIoResource> getResources() throws IOException;
+
+    /**
+     * Invokes the #PlexusIoResourceConsumer for each resource in this collection
+     * @param resourceConsumer The consumer of the resource
+     * @throws IOException .
+     */
+    public void forEach(PlexusIoResourceConsumer resourceConsumer) throws IOException;
+
 
     /**
      * Returns the resources suggested name. This is used for

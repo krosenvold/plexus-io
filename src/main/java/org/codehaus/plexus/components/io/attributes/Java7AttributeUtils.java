@@ -15,8 +15,6 @@
  */
 package org.codehaus.plexus.components.io.attributes;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -28,6 +26,9 @@ import java.nio.file.attribute.PosixFileAttributes;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author Kristian Rosenvold
@@ -115,7 +116,12 @@ public class Java7AttributeUtils
     public static @Nonnull BasicFileAttributes getFileAttributes( @Nonnull File file )
         throws IOException
     {
-        final Path path = file.toPath();
+        return getFileAttributes( file.toPath() );
+    }
+
+    public static BasicFileAttributes getFileAttributes( Path path)
+        throws IOException
+    {
         if (path.getFileSystem().supportedFileAttributeViews().contains( "posix" ))
         {
 

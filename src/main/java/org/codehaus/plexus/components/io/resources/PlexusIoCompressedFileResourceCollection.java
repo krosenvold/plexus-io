@@ -16,17 +16,19 @@ package org.codehaus.plexus.components.io.resources;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributes;
-import org.codehaus.plexus.components.io.functions.InputStreamSupplier;
-import org.codehaus.plexus.components.io.functions.InputStreamTransformer;
-
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
+
+import javax.annotation.Nonnull;
+
+import org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributes;
+import org.codehaus.plexus.components.io.functions.InputStreamSupplier;
+import org.codehaus.plexus.components.io.functions.InputStreamTransformer;
+import org.codehaus.plexus.components.io.functions.PlexusIoResourceConsumer;
 
 
 /**
@@ -112,6 +114,16 @@ public abstract class PlexusIoCompressedFileResourceCollection
             ResourceFactory.createResource(f, p, attributes, inputStreamSupplier );
 
         return Collections.singleton( resource ).iterator();
+    }
+
+
+    public void forEach( PlexusIoResourceConsumer resourceConsumer )
+        throws IOException
+    {
+        final Iterator<PlexusIoResource> resources = getResources();
+        while (resources.hasNext()){
+            resourceConsumer.accept(  resources.next() );
+        }
     }
 
     protected String getName( File file ) throws IOException {

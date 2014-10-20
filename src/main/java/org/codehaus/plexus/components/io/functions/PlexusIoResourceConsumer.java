@@ -1,7 +1,6 @@
-package org.codehaus.plexus.components.io.fileselectors;
-
+package org.codehaus.plexus.components.io.functions;
 /*
- * Copyright 2007 The Codehaus Foundation.
+ * Copyright 2014 The Codehaus Foundation.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,21 +17,13 @@ package org.codehaus.plexus.components.io.fileselectors;
 
 import java.io.IOException;
 
-import javax.annotation.Nonnull;
-
+import org.codehaus.plexus.components.io.resources.PlexusIoResource;
 
 /**
- * The default file selector: Selects all files.
+ * Consume a PlexusIoResource
+ * @author Kristian Rosenvold
  */
-public class AllFilesFileSelector implements FileSelector
+public interface PlexusIoResourceConsumer
 {
-    /**
-     * The all files selectors role-hint: "all".
-     */
-    public static final String ROLE_HINT = "all";
-
-    public boolean isSelected( @Nonnull FileInfo fileInfo ) throws IOException
-    {
-        return true;
-    }
+    void accept( PlexusIoResource resource ) throws IOException;
 }

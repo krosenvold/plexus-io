@@ -16,20 +16,16 @@ package org.codehaus.plexus.components.io.attributes;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.components.io.attributes.proxy.PlexusIoProxyResourceAttributes;
-import org.codehaus.plexus.util.cli.StreamConsumer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
-import java.util.regex.Pattern;
+
+import org.codehaus.plexus.components.io.attributes.proxy.PlexusIoProxyResourceAttributes;
+import org.codehaus.plexus.util.cli.StreamConsumer;
 
 /**
  * @author Kristian Rosenvold

@@ -16,17 +16,17 @@ package org.codehaus.plexus.components.io.resources;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.components.io.filemappers.FileMapper;
-import org.codehaus.plexus.components.io.filemappers.PrefixFileMapper;
-import org.codehaus.plexus.components.io.fileselectors.FileSelector;
-import org.codehaus.plexus.components.io.functions.InputStreamTransformer;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Iterator;
 
 import javax.annotation.Nonnull;
+
+import org.codehaus.plexus.components.io.filemappers.FileMapper;
+import org.codehaus.plexus.components.io.filemappers.PrefixFileMapper;
+import org.codehaus.plexus.components.io.fileselectors.FileSelector;
+import org.codehaus.plexus.components.io.functions.InputStreamTransformer;
 
 
 /**

@@ -16,11 +16,12 @@ package org.codehaus.plexus.components.io.attributes;
  * limitations under the License.
  */
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import static org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributeUtils.*;
+
 import java.util.Arrays;
 
-import static org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributeUtils.*;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Attributes that are read by legacy-style attribute parsing.

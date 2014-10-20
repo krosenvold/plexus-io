@@ -22,13 +22,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
+import javax.annotation.Nonnull;
+
 import org.codehaus.plexus.components.io.attributes.Java7AttributeUtils;
-import org.codehaus.plexus.components.io.attributes.Java7FileAttributes;
 import org.codehaus.plexus.components.io.attributes.Java7Reflector;
 import org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributes;
-import org.codehaus.plexus.components.io.attributes.SymlinkUtils;
-
-import javax.annotation.Nonnull;
 
 /**
  * Implementation of {@link PlexusIoResource} for files.
@@ -74,7 +72,7 @@ public class PlexusIoFileResource
         return file.getPath().replace( '\\', '/' );
     }
 
-    public static PlexusIoFileResource fileOnDisk(File file, String name, @Nonnull PlexusIoResourceAttributes attrs)
+    public static @Nonnull PlexusIoFileResource fileOnDisk(File file, String name, @Nonnull PlexusIoResourceAttributes attrs)
     {
         if ( attrs.isSymbolicLink() )
             return new PlexusIoSymlinkResource( file, name, attrs);
@@ -82,7 +80,7 @@ public class PlexusIoFileResource
             return new PlexusIoFileResource( file, name, attrs );
     }
 
-    public static PlexusIoFileResource withName( File file, String name, @Nonnull PlexusIoResourceAttributes attrs )
+    public static @Nonnull PlexusIoFileResource withName( File file, String name, @Nonnull PlexusIoResourceAttributes attrs )
     {
         if ( attrs.isSymbolicLink() )
             return new PlexusIoSymlinkResource( file, name, attrs);
@@ -90,7 +88,7 @@ public class PlexusIoFileResource
             return new PlexusIoFileResource( file, name, attrs );
     }
 
-    public static PlexusIoFileResource existingFile( File file, @Nonnull PlexusIoResourceAttributes attrs )
+    public static @Nonnull PlexusIoFileResource existingFile( File file, @Nonnull PlexusIoResourceAttributes attrs )
     {
         if ( attrs.isSymbolicLink() )
             return new PlexusIoSymlinkResource( file, getName( file ), attrs);

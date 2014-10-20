@@ -16,11 +16,10 @@ package org.codehaus.plexus.components.io.attributes;
  * limitations under the License.
  */
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileOwnerAttributeView;
 import java.nio.file.attribute.PosixFileAttributes;
@@ -29,6 +28,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /*
  * File attributes for a java7 file that are backed on disk by a file.
@@ -54,17 +56,22 @@ public class Java7FileAttributes
 
     private final Set<PosixFilePermission> permissions;
 
+    private final BasicFileAttributes basicFileAttributes;
+
+
     public Java7FileAttributes( @Nonnull File file,  @Nonnull Map<Integer, String> userCache,
                                 @Nonnull Map<Integer, String> groupCache )
         throws IOException
     {
 
-        BasicFileAttributes basicFileAttributes = Java7AttributeUtils.getFileAttributes( file );
+        final Path path = file.toPath();
+        this.basicFileAttributes = Java7AttributeUtils.getFileAttributes( path );
 
         if ( basicFileAttributes instanceof PosixFileAttributes )
         {
-            this.permissions = ( (PosixFileAttributes) basicFileAttributes ).permissions();
-            groupId = (Integer) Files.readAttributes( file.toPath(), "unix:gid" ).get( "gid" );
+            final PosixFileAttributes posixAttributes = (PosixFileAttributes) basicFileAttributes;
+            this.permissions = posixAttributes.permissions();
+            groupId = (Integer) Files.readAttributes( path, "unix:gid" ).get( "gid" );
 
             String groupName = groupCache.get( groupId );
             if ( groupName != null )
@@ -73,10 +80,10 @@ public class Java7FileAttributes
             }
             else
             {
-                this.groupName = ( (PosixFileAttributes) basicFileAttributes ).group().getName();
+                this.groupName = posixAttributes.group().getName();
                 groupCache.put( groupId, this.groupName );
             }
-            userId = (Integer) Files.readAttributes( file.toPath(), "unix:uid" ).get( "uid" );
+            userId = (Integer) Files.readAttributes( path, "unix:uid" ).get( "uid" );
             String userName = userCache.get( userId );
             if ( userName != null )
             {
@@ -84,7 +91,7 @@ public class Java7FileAttributes
             }
             else
             {
-                this.userName = ( (PosixFileAttributes) basicFileAttributes ).owner().getName();
+                this.userName = posixAttributes.owner().getName();
                 userCache.put( userId, this.userName );
             }
             octalMode = calculatePosixOctalMode();
@@ -95,7 +102,7 @@ public class Java7FileAttributes
             this.groupName = null;
             this.groupId = null;
             octalMode = -1;
-            permissions = Collections.emptySet();
+            this.permissions = Collections.emptySet();
         }
 
         symbolicLink = basicFileAttributes.isSymbolicLink();
@@ -144,9 +151,9 @@ public class Java7FileAttributes
         return containsPermission( PosixFilePermission.GROUP_EXECUTE );
     }
 
-    private boolean containsPermission( PosixFilePermission groupExecute )
+    private boolean containsPermission( PosixFilePermission permission )
     {
-        return permissions.contains( groupExecute );
+        return permissions.contains( permission );
     }
 
     public boolean isGroupReadable()

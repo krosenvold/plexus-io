@@ -16,12 +16,13 @@ package org.codehaus.plexus.components.io.resources.proxy;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.components.io.resources.PlexusIoResource;
-
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
+import javax.annotation.Nonnull;
+
+import org.codehaus.plexus.components.io.resources.PlexusIoResource;
 
 public class PlexusIoProxyResource
     implements PlexusIoResource

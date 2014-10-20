@@ -1,6 +1,5 @@
 package org.codehaus.plexus.components.io.resources;
 
-import java.io.File;
 import java.io.IOException;
 
 /**

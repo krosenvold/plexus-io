@@ -19,12 +19,12 @@ package org.codehaus.plexus.components.io.fileselectors;
 import java.io.File;
 import java.io.IOException;
 
-import org.codehaus.plexus.util.FileUtils;
-import org.codehaus.plexus.util.MatchPatterns;
-import org.codehaus.plexus.util.SelectorUtils;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import org.codehaus.plexus.components.io.dirscanner.DirectoryScanner;
+import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.MatchPatterns;
 
 
 /**
@@ -179,19 +179,6 @@ public class
     }
 
     /**
-     * Tests, whether the given pattern is matching the given name.
-     * @param pattern The pattern to match
-     * @param name The name to test
-     * @param isCaseSensitive Whether the pattern is case sensitive.
-     * @return True, if the pattern matches, otherwise false
-     */
-    protected boolean matchPath( @Nonnull String pattern, @Nonnull String name,
-                                 boolean isCaseSensitive )
-    {
-        return SelectorUtils.matchPath( pattern, name, isCaseSensitive );
-    }
-
-    /**
      * Tests whether or not a name matches against at least one include
      * pattern.
      *
@@ -207,7 +194,9 @@ public class
     public boolean isSelected( @Nonnull FileInfo fileInfo ) throws IOException
     {
         final String name = getCanonicalName( fileInfo.getName() );
-        return isIncluded( name ) && !isExcluded( name );
+        String[] tokenizedName = DirectoryScanner.tokenizePathToString( name, File.separator );
+        return computedIncludes.matches( name, tokenizedName, isCaseSensitive )
+            && !computedExcludes.matches( name, tokenizedName, isCaseSensitive );
     }
 
     /**

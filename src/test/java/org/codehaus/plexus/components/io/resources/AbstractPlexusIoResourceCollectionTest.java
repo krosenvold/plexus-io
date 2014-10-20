@@ -2,6 +2,7 @@ package org.codehaus.plexus.components.io.resources;
 
 import junit.framework.TestCase;
 import org.codehaus.plexus.components.io.functions.InputStreamTransformer;
+import org.codehaus.plexus.components.io.functions.PlexusIoResourceConsumer;
 
 import javax.annotation.Nonnull;
 import java.io.ByteArrayInputStream;
@@ -26,6 +27,12 @@ public class AbstractPlexusIoResourceCollectionTest
                 throws IOException
             {
                 return Arrays.asList(getResource( "r1" ), getResource( "r2" )).iterator();
+            }
+
+            public void forEach( PlexusIoResourceConsumer resourceConsumer )
+                throws IOException
+            {
+
             }
         };
 

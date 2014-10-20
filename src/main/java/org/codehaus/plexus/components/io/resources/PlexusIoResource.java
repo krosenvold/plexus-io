@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.codehaus.plexus.components.io.fileselectors.FileInfo;
-
 import javax.annotation.Nonnull;
+
+import org.codehaus.plexus.components.io.fileselectors.FileInfo;
 
 
 /**

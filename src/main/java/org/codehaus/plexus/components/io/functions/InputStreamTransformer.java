@@ -1,9 +1,9 @@
 package org.codehaus.plexus.components.io.functions;
 
-import org.codehaus.plexus.components.io.resources.PlexusIoResource;
-
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.codehaus.plexus.components.io.resources.PlexusIoResource;
 
 /**
  * Transform a stream into some other kind of stream. May be used to apply filtering or other

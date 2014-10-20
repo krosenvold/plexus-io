@@ -16,11 +16,11 @@ package org.codehaus.plexus.components.io.resources.proxy;
  * limitations under the License.
  */
 
+import javax.annotation.Nonnull;
+
 import org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributes;
 import org.codehaus.plexus.components.io.resources.PlexusIoResource;
 import org.codehaus.plexus.components.io.resources.PlexusIoResourceWithAttributes;
-
-import javax.annotation.Nonnull;
 
 public class PlexusIoProxyResourceWithAttributes
 	extends PlexusIoProxyResource

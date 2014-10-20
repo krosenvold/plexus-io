@@ -16,9 +16,10 @@ package org.codehaus.plexus.components.io.filemappers;
  * limitations under the License.
  */
 
-import javax.annotation.Nonnull;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.annotation.Nonnull;
 
 
 

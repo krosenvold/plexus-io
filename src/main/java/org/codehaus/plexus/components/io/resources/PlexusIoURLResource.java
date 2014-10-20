@@ -16,10 +16,11 @@ package org.codehaus.plexus.components.io.resources;
  * limitations under the License.
  */
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
+import javax.annotation.Nonnull;
 
 public abstract class PlexusIoURLResource
     extends AbstractPlexusIoResource

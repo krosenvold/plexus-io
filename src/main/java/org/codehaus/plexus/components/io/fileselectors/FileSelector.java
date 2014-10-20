@@ -16,8 +16,9 @@ package org.codehaus.plexus.components.io.fileselectors;
  * limitations under the License.
  */
 
-import javax.annotation.Nonnull;
 import java.io.IOException;
+
+import javax.annotation.Nonnull;
 
 
 /**

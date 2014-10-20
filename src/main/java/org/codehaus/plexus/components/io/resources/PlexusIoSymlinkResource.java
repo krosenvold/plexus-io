@@ -1,11 +1,12 @@
 package org.codehaus.plexus.components.io.resources;
 
-import org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributes;
-import org.codehaus.plexus.components.io.attributes.SymlinkUtils;
-
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
+
+import javax.annotation.Nonnull;
+
+import org.codehaus.plexus.components.io.attributes.PlexusIoResourceAttributes;
+import org.codehaus.plexus.components.io.attributes.SymlinkUtils;
 
 public class PlexusIoSymlinkResource
     extends PlexusIoFileResource

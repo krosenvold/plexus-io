@@ -16,25 +16,18 @@ package org.codehaus.plexus.components.io.attributes;
  * limitations under the License.
  */
 
-import org.codehaus.plexus.util.FileUtils;
-import org.codehaus.plexus.util.Os;
-import org.codehaus.plexus.util.cli.CommandLineCallable;
-import org.codehaus.plexus.util.cli.CommandLineException;
-import org.codehaus.plexus.util.cli.CommandLineUtils;
-import org.codehaus.plexus.util.cli.Commandline;
-import org.codehaus.plexus.util.cli.StreamConsumer;
-
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 import java.util.regex.Pattern;
+
+import javax.annotation.Nonnull;
+
+import org.codehaus.plexus.util.FileUtils;
+import org.codehaus.plexus.util.Os;
+import org.codehaus.plexus.util.cli.*;
 
 @SuppressWarnings( { "NullableProblems" } )
 public final class PlexusIoResourceAttributeUtils

@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.codehaus.plexus.components.io.functions.PlexusIoResourceConsumer;
+
 
 /**
  * Default implementation of {@link PlexusIoFileResourceCollection} for
@@ -80,6 +82,25 @@ public abstract class AbstractPlexusIoArchiveResourceCollection extends Abstract
             ((Closeable)it).close();
         }
         return result.iterator();
+    }
+
+
+    public void forEach( PlexusIoResourceConsumer resourceConsumer )
+        throws IOException
+    {
+        final Iterator<PlexusIoResource> it = getEntries();
+        while( it.hasNext())
+        {
+            final PlexusIoResource res = it.next();
+            if ( isSelected( res ) )
+            {
+                resourceConsumer.accept(  res );
+            }
+        }
+        if (it instanceof Closeable )
+        {
+            ((Closeable)it).close();
+        }
     }
 
     public long getLastModified() throws IOException
